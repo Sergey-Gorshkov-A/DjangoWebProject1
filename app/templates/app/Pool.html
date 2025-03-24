@@ -1,0 +1,62 @@
+{% extends "app/layout.html" %}
+{% block content %}
+{% if form != None %}
+    <br><h2>Оставте, пожалуйста, отзыв о сайте</h2><br>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <label for="{{ form.name.id_for_label }}"> {{ form.name.label }}:</label>
+                {{ form.name }}<br><br>
+                <label for="{{ form.question1.id_for_label }}"> {{ form.question1.label }}:</label>
+                {{ form.question1 }}<br><br>
+                <label for="{{ form.question2.id_for_label }}"> {{ form.question2.label }}:</label>
+                {{ form.question2 }}<br><br>
+                <label for="{{ form.question3.id_for_label }}"> {{ form.question3.label }}:</label>
+                {{ form.question3 }}<br><br>
+                <label for="{{ form.question4.id_for_label }}"> {{ form.question4.label }}:</label>
+                {{ form.question4 }}<br><br>
+                <label for="{{ form.text.id_for_label }}"> {{ form.text.label }}:</label>
+                {{ form.text }}<br><br>
+                <input id="inp1" type="submit" value="Отправить" />
+                <script>
+                    function a1_view() {
+                        $('#id_name').css('background-color', 'yellow');
+                    }
+                    function a1_return() {
+                        $('#id_name').css('background-color', 'white');
+                    }
+                    function a2_view() {
+                        $('#id_text').css('background-color', 'yellow');
+                    }
+                    function a2_return() {
+                        $('#id_text').css('background-color', 'white');
+                    }
+                    function a3_view() {
+                        $('#inp1').css('color', 'green');
+                    }
+                    function a3_return() {
+                        $('#inp1').css('color', 'black');
+                    }
+
+                    $('#id_name').focus(a1_view);
+                    $('#id_name').blur(a1_return);
+                    $('#id_text').focus(a2_view);
+                    $('#id_text').blur(a2_return);
+                    $('#inp1').mouseover(a3_view);
+                    $('#inp1').mouseout(a3_return);
+                </script>
+            </form>
+        </div>
+{% else %}
+    <br /><h2>Благодарим за предоставленную информацию!</h2><br />
+    <h3>Отзыв:</h3>
+    <ul>
+        <li><span>Имя:</span> {{ data.name }}</li>
+        <li><span>Вам нравится содержание страниц сайта?:</span> {{ data.question1 }}</li>
+        <li><span>Вам нравится офорление сайта?:</span> {{ data.question2 }}</li>
+        <li><span>У вас есть машина?:</span> {{ data.question3 }}</li>
+        <li><span>Вам нужен ремонт?:</span> {{ data.question4 }}</li>
+        <li><span>Мнение:</span> {{ data.text }}</li>
+    </ul>
+{% endif %}
+{% endblock %}

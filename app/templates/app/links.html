@@ -1,0 +1,18 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Полезные ресурсы</title>
+</head>
+<body>
+    {% load staticfiles %}
+    <ul>
+        <li><a href="https://uremont.com/" target="_blank"> <img src="{% static 'app/content/logo_1.png' %}" alt="Logo 1" /></a></li>
+        <li><a href="https://www.abcp.ru/carservice" target="_blank"> <img src="{% static 'app/content/logo_2.png' %}" alt="Logo 2" /></a></li>
+        <li><a href="https://euroauto.ru/" target="_blank"> <img src="{% static 'app/content/logo_3.png' %}" alt="Logo 3" /></a></li>
+    </ul>
+</body>
+
+{% endblock %}
