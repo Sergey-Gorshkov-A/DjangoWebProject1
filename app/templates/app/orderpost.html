@@ -1,0 +1,48 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+{% if order_1.service.image and order_1.service.image.url != '/media/temp.jpg' %}
+
+<img src="{{ order_1.service.image.url }}" alt=" Картинка услуги" />
+
+{% endif %}
+
+<h2> {{order_1.service.title}} </h2>
+
+<p> {{order_1.service.content|linebreaksbr}} </p>      {# вывод текста по абзацам#}
+
+{% if order_1.confrim %}
+<h2> Заказ подтверждён </h2>
+{% else %}
+<h2> Заказ не подтверждён </h2>
+{% endif %}
+
+{% if order_1.completed %}
+<h2> Заказ завершен </h2>
+{% else %}
+<h2> Заказ не завершен </h2>
+{% endif %}
+
+<p><a href="{% url 'basket' %}"> НАЗАД </a></p>
+
+{% if user.is_authenticated %}
+
+<form method="POST">
+    {% csrf_token %} {# защита от атак CSRF#}
+
+    <div>
+
+        <button type="submit" class="save btn btn-default"> Удалить </button>
+
+    </div>
+
+</form>
+
+{% else %}
+
+<h3> Для взаимодействия с заказом, пожалуйста, авторизуйтесь </h3>
+
+{% endif %}
+
+{% endblock %}

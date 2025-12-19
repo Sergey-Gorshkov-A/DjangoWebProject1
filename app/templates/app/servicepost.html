@@ -1,0 +1,38 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+{% if service_1.image and service_1.image.url != '/media/temp.jpg' %}
+
+<img src="{{ service_1.image.url }}" alt=" Картинка услуги" />
+
+{% endif %}
+
+<h2> {{service_1.title}} </h2>
+
+<p> {{service_1.content|linebreaksbr}} </p>      {# вывод текста по абзацам#}
+
+<p><a href="{% url 'catalog' %}"> НАЗАД </a></p>
+
+{% if user.is_authenticated %}
+
+<h3>Купить:</h3>
+
+<form method="POST">
+    {% csrf_token %} {# защита от атак CSRF#}
+
+    <div>
+
+        <button type="submit" class="save btn btn-default"> Добавить в корзину </button>
+
+    </div>
+
+</form>
+
+{% else %}
+
+<h3> Для добавления услуги в карзину, пожалуйста, авторизуйтесь </h3>
+
+{% endif %}
+
+{% endblock %}

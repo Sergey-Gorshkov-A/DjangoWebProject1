@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+
+{% if user.is_staff or user.is_superuser %}
+<br />
+
+{% for order in orders %}
+
+<hr />
+
+<div class="">
+
+    <h2> {{order.service.title}} </h2>
+
+    <p> {{order.service.customer}} </p>
+
+    <h4> {{order.ordered}} </h4>
+
+    <p> {{order.service.description}} </p>
+
+    <p><a href="{% url 'editorder' parametr=order.ordered %}"> Подтвердить заказ </a> </p>
+    <p><a href="{% url 'completedorder' parametr=order.ordered %}"> Завершить заказ </a> </p>
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<h3> Доступ к заказам клиентов есть только у менеджеров </h3>
+
+{% endif %}
+{% endblock %}

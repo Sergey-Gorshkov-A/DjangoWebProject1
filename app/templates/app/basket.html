@@ -1,0 +1,25 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<br />
+
+{% for order in orders %}
+
+<hr />
+
+<div class="">
+
+    <h2> {{order.service.title}} </h2>
+
+    <h4> {{order.service.description}} </h4>
+
+    <p> {{order.price}} рублей</p>
+
+    <p><a href="{% url 'orderpost' parametr=order.ordered %}"> Подробнее </a> </p>
+</div>
+
+{% endfor %}
+
+{% endblock %}

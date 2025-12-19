@@ -1,0 +1,21 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<br />
+
+{% for category in categories %}
+
+<hr />
+
+<div class="">
+
+    <h2> {{category}} </h2>
+
+    <p><a href="{% url 'service' parametr=category %}"> Все услуги данной категории </a> </p>
+</div>
+
+{% endfor %}
+
+{% endblock %}

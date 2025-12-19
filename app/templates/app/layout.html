@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Мое приложение на Django</title>
+    <title>{{ title }} - AutoFixER</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
@@ -27,17 +27,26 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'home' %}">Домашняя страница</a></li>
                     <li><a href="{% url 'about' %}">О нас</a></li>
-                    <li><a href="{% url 'contact' %}">Контакт</a></li>
+                    <li><a href="{% url 'contact' %}">Контакты</a></li>
                     <li><a href="{% url 'links' %}">Полезные ресурсы</a></li>
+                    <li><a href="{% url 'catalog' %}">Каталог услуг</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'basket' %}">Мои заказы</a></li>
                     <li><a href="{% url 'pool' %}">Отзыв</a></li>
-                    <li><a href="{% url 'blog' %}">Посты</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'blog' %}">Новости</a></li>
                     {% if user.is_superuser %}
-                        <li><a href="{% url 'newpost' %}">Добавить статью</a></li>
+                    <li><a href="{% url 'newpost' %}">Добавить статью</a></li>
+                    <li><a href="{% url 'newservice' %}">Добавить услугу</a></li>
                     {% endif %}
-                    <li><a href="{% url 'videopost' %}"> Видео </a></li>
+                    {% if user.is_staff %}
+                    <li><a href="{% url 'order' %}"> Заказы </a></li>
+                    {% endif %}
                     {% if not user.is_authenticated %}
-                        <li><a href="{% url 'registration' %}">Регистрация</a></li>
+                    <li><a href="{% url 'videopost' %}"> Видео </a></li>
+                    <li><a href="{% url 'registration' %}">Регистрация</a></li>
                     {% endif %}
+
                 </ul>
                 {% include 'app/loginpartial.html' %}
             </div>
@@ -48,7 +57,7 @@
 {% block content %}{% endblock %}
         <hr/>
         <footer>
-            <p>&copy; {{ year }} - Мое приложение на Django</p>
+            <p>&copy; 2024 - {{ year }} - AutoFixER</p>
         </footer>
     </div>
 

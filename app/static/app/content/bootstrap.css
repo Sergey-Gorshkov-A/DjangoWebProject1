@@ -4138,7 +4138,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   .navbar-collapse.collapse {
     display: block !important;
     height: auto !important;
-    padding-bottom: 0;
+    padding-bottom: 0px;
     overflow: visible !important;
   }
   .navbar-collapse.in {
@@ -4181,7 +4181,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  position: fixed;
+  position: 1px;
   right: 0;
   left: 0;
   border-width: 0 0 1px;

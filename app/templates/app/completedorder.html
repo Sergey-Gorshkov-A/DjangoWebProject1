@@ -1,0 +1,26 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1>Завершить заказ</h1>
+
+
+<h2> {{order_1.service.title}} </h2>
+
+<h2> Покупатель: {{order_1.customer.username}} </h2>
+
+<p> Цена: {{order_1.service.price}} рублей </p>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {% if order_1.confrim %}
+        <button type="submit" class="save btn btn-default"> Завершить заказ </button>
+        {% else %}
+        <h3> Для завершения данного заказа необходимо его подтверждение </h3>
+        {% endif %}
+    </div>
+</form>
+<p><a href="{% url 'order' %}"> Назад </a> </p>
+
+{% endblock %}

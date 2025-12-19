@@ -1,0 +1,27 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<br />
+
+{% for service in services %}
+
+<hr />
+
+<div class="">
+
+    <h2> {{service.title}} </h2>
+
+    <h4> {{service.description}} </h4>
+
+    <p> {{service.price}} рублей</p>
+
+    <p><a href="{% url 'servicepost' parametr=service.id %}"> Купить </a> </p>
+</div>
+
+{% endfor %}
+
+<p><a href="{% url 'catalog' %}"> Назад </a> </p>
+
+{% endblock %}

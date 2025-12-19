@@ -1,0 +1,31 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h3>Редактировать заказ</h3>
+
+{% if order_1.service.image and order_1.service.image.url != '/media/temp.jpg' %}
+
+<img src="{{ order_1.service.image.url }}" alt=" Картинка услуги" />
+
+{% endif %}
+
+<h2> {{order_1.customer.username}} </h2>
+
+<h2> {{order_1.service.title}} </h2>
+
+<p> {{order_1.service.content|linebreaksbr}} </p>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {% if order_1.confrim %}
+        <button type="submit" class="save btn btn-default"> Отменить подтверждение </button>
+        {% else %}
+        <button type="submit" class="save btn btn-default"> Подтвердить заказ </button>
+        {% endif %}
+    </div>
+</form>
+<p><a href="{% url 'order' %}"> Назад </a> </p>
+
+{% endblock %}

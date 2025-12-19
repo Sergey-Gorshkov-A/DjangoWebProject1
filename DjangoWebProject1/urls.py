@@ -38,6 +38,15 @@ urlpatterns = [
     path('blogpost/<int:parametr>/', views.blogpost, name='blogpost'),
     path('newpost/', views.newpost, name='newpost'),
     path('videopost/', views.videopost, name='videopost'),
+    path('catalog/', views.catalog, name='catalog'),
+    path('service/<str:parametr>', views.service, name='service'),
+    path('servicepost/<int:parametr>/', views.servicepost, name='servicepost'),
+    path('newservice/', views.newservice, name='newservice'),
+    path('basket/', views.basket, name='basket'),
+    path('orderpost/<str:parametr>/', views.orderpost, name='orderpost'),
+    path('order/', views.order, name='order'),
+    path('editorder/<str:parametr>/', views.editorder, name='editorder'),
+    path('completedorder/<str:parametr>/', views.completedorder, name='completedorder'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

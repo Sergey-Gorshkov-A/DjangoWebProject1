@@ -50,5 +50,48 @@ class Comment(models.Model):
         verbose_name = "комментарий" # имя, под которым модель будет отображаться в административном разделе (для одной статьи блога)
         verbose_name_plural = "комментарии" # тоже для всех статей блога
 
+
+class Service(models.Model):
+
+    title = models.CharField(max_length=100, verbose_name="Заголовок")
+    description = models.TextField(verbose_name="Краткое содержание")
+    content = models.TextField(verbose_name="Полное содержание")
+    price = models.IntegerField(default=0, verbose_name="Цена")
+    image = models.FileField(default='temp.jpg', verbose_name='Путь к картинке')
+    category = models.CharField(default='', max_length=100, verbose_name="Категория")
+
+    def get_absolute_url(self):
+        return reverse("servicepost", args=[str(self.id)])
+
+    def __str__(self): 
+        return self.title
+
+    class Meta:
+        db_table = "Services" # имя таблицы для модели
+        ordering = ["-price"] # порядок сортировки данных в модели ("-" означает по убыванию)
+        verbose_name = "услуга"
+        verbose_name_plural = "услуги" 
+
+
+class Order(models.Model):
+    
+    service = models.ForeignKey(Service, null=True, blank=True, on_delete = models.SET_NULL, verbose_name = "Услуга")
+    customer = models.ForeignKey(User, null=True, blank=True, on_delete = models.SET_NULL, verbose_name = "Покупатель")
+    confrim = models.BooleanField(default=False, verbose_name="Подтвержден")
+    ordered = models.DateTimeField(default=datetime.now(), db_index=True, verbose_name="Заказан")
+    price = models.IntegerField(default=0, verbose_name="Цена")
+    completed = models.BooleanField(default=False, verbose_name="Завершен")
+    
+    def get_absolute_url(self):
+        return reverse("orderpost", args=[str(self.id)])
+
+    class Meta:
+        db_table = "Orders" # имя таблицы для модели
+        ordering = ["-id"] # порядок сортировки данных в модели ("-" означает по убыванию)
+        verbose_name = "заказ"
+        verbose_name_plural = "заказы"
+
 admin.site.register(Blog)
 admin.site.register(Comment)
+admin.site.register(Service)
+admin.site.register(Order)
