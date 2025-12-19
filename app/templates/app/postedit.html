@@ -8,6 +8,7 @@
     <div>
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default"> Сохранить </button>
+        <p><a href="{% url 'deletepost' parametr=post_1.id %}"> Удалить </a> </p>
     </div>
 </form>
 

@@ -6,7 +6,7 @@ from datetime import datetime
 from pickle import TRUE
 from unicodedata import category
 import weakref
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from app.forms import PoolForm, CommentForm, BlogForm, ServiceForm, OrderForm
 from django.contrib.auth.forms import UserCreationForm
@@ -282,7 +282,7 @@ def newservice(request):
             service_f = serviceform.save(commit=False)
             service_f.save()
 
-            return redirect('service')
+            return redirect('catalog')
     else:
         serviceform = ServiceForm()
     
@@ -435,3 +435,15 @@ def editservice(request, parametr):
             'year':datetime.now().year,
             }
         )
+
+
+def deletepost(request, parametr):
+    post_1 = get_object_or_404(Blog, id=parametr)
+    post_1.delete()
+    return redirect('blog')
+
+
+def deleteservice(request, parametr):
+    service_1 = get_object_or_404(Service, id=parametr)
+    service_1.delete()
+    return redirect('catalog')
