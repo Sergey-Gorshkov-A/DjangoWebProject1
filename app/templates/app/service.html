@@ -19,6 +19,7 @@
 
     <p><a href="{% url 'servicepost' parametr=service.id %}"> Купить </a> </p>
 
+    <p><a href="{% url 'addreview' parametr=service.id %}"> Оставить отзыв </a> </p>
     {% if user.is_superuser %}
     <p><a href="{% url 'editservice' parametr=service.id %}"> Редактировать </a> </p>
     {% endif %}

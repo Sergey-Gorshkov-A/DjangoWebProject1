@@ -51,6 +51,10 @@ urlpatterns = [
     path('editservice/<int:parametr>/', views.editservice, name='editservice'),
     path('deletepost/<int:parametr>/', views.deletepost, name='deletepost'),
     path('deleteservice/<int:parametr>/', views.deleteservice, name='deleteservice'),
+    path('review/', views.review, name='review'),
+    path('addreview/<int:parametr>/', views.addreview, name='addreview'),
+    path('editreview/<int:parametr>/', views.editreview, name='editreview'),
+    path('deletereview/<int:parametr>/', views.deletereview, name='deletereview'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

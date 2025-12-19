@@ -1,0 +1,15 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h3>Добавить отзыв</h3>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default"> Сохранить </button>
+    </div>
+</form>
+<p><a href="{% url 'service' parametr=service_1.category %}"> Назад </a> </p>
+
+{% endblock %}

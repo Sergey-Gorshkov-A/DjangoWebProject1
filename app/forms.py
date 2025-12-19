@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
-from .models import Comment, Blog, Service, Order
+from .models import Comment, Blog, Service, Order, Review
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -64,3 +64,14 @@ class OrderForm (forms.ModelForm):
         model = Order # используемая модель
         fields = ('confrim',)
         labels = {'confrim': "Подтверждение заказа"}
+
+
+class ReviewForm(forms.ModelForm):
+    
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        widgets = {
+            'rating': forms.Select(attrs={'class': 'form-control'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+        }

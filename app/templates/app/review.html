@@ -1,0 +1,43 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<br />
+
+{% for review in reviews %}
+
+<hr />
+
+<div class="">
+
+    <h1> Автор: {{review.author.username}} </h1>
+
+    <h2> Услуга: {{review.service.title}} </h2>
+
+    <h4> {{review.comment}} </h4>
+
+    {% load staticfiles %}
+    {% if review.rating == 1 %}
+    <img src="{% static 'app/content/r_1.jpg' %}" alt="R_1" />
+    {% endif %}
+    {% if review.rating == 2 %}
+    <img src="{% static 'app/content/r_2.jpg' %}" alt="R_2" />
+    {% endif %}
+    {% if review.rating == 3 %}
+    <img src="{% static 'app/content/r_3.jpg' %}" alt="R_3" />
+    {% endif %}
+    {% if review.rating == 4 %}
+    <img src="{% static 'app/content/r_4.jpg' %}" alt="R_4" />
+    {% endif %}
+    {% if review.rating == 5 %}
+    <img src="{% static 'app/content/r_5.jpg' %}" alt="R_5" />
+    {% endif %}
+    {% if user.is_superuser %}
+    <p><a href="{% url 'deletereview' parametr=review.id %}"> Удалить </a> </p>
+    {% endif %}
+</div>
+
+{% endfor %}
+
+{% endblock %}

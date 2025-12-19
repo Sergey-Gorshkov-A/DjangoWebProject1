@@ -62,10 +62,12 @@
     <Content Include="app\static\app\content\images\2.jpg" />
     <Content Include="app\static\app\content\images\3.jpg" />
     <Content Include="app\templates\.editorconfig" />
+    <Content Include="app\templates\app\addreview.html" />
     <Content Include="app\templates\app\blog.html" />
     <Content Include="app\templates\app\catalog.html" />
     <Content Include="app\templates\app\completedorder.html" />
     <Content Include="app\templates\app\editorder.html" />
+    <Content Include="app\templates\app\editreview.html" />
     <Content Include="app\templates\app\editservice.html" />
     <Content Include="app\templates\app\links.html" />
     <Content Include="app\templates\app\order.html" />
@@ -76,6 +78,7 @@
     <Content Include="app\templates\app\blogpost.html" />
     <Content Include="app\templates\app\newpost.html" />
     <Content Include="app\templates\app\newservice.html" />
+    <Content Include="app\templates\app\review.html" />
     <Content Include="app\templates\app\servicepost.html" />
     <Content Include="app\templates\app\videopost.html" />
     <Content Include="app\templates\app\service.html" />

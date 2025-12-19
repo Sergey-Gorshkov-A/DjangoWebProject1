@@ -8,10 +8,10 @@ from unicodedata import category
 import weakref
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
-from app.forms import PoolForm, CommentForm, BlogForm, ServiceForm, OrderForm
+from app.forms import PoolForm, CommentForm, BlogForm, ServiceForm, OrderForm, ReviewForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
-from .models import Blog, Comment, Service, Order
+from .models import Blog, Comment, Service, Order, Review
 
 def home(request):
     """Renders the home page."""
@@ -447,3 +447,79 @@ def deleteservice(request, parametr):
     service_1 = get_object_or_404(Service, id=parametr)
     service_1.delete()
     return redirect('catalog')
+
+
+def deletereview(request, parametr):
+    review_1 = get_object_or_404(Review, id=parametr)
+    review_1.delete()
+    return redirect('review')
+
+
+def review(request):
+    
+    assert isinstance(request, HttpRequest)
+    reviews = Review.objects.all()
+    return render(
+        request,
+        'app/review.html',
+        {
+            'title':'Отзывы клиентов',
+            'reviews': reviews,
+            'year':datetime.now().year,
+            }
+        )
+
+
+def addreview(request, parametr):
+    
+    service_1 = get_object_or_404(Service, id=parametr)
+
+    existing_review = Review.objects.filter(service=service_1, author=request.user).first()
+    if existing_review:
+        return redirect('editreview', parametr=existing_review.id)
+
+    assert isinstance(request, HttpRequest)
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.service = service_1
+            review.author = request.user
+            review.save()
+            return redirect('service', parametr=service_1.category)
+    else:
+        form = ReviewForm()
+    return render(
+        request,
+        'app/addreview.html',
+        {
+            'title':'Добавить отзыв',
+            'form': form,
+            'service_1': service_1,
+            'year':datetime.now().year,
+            }
+        )
+
+
+def editreview(request, parametr):
+    review = get_object_or_404(Review, id=parametr, author=request.user)
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('service', parametr=review.service.category)
+    else:
+        form = ReviewForm(instance=review)
+
+    return render(
+        request, 
+        'app/editreview.html', 
+        {
+            'title':'Изменить отзыв',
+            'form': form,
+            'service_1': review.service,
+            'year':datetime.now().year,
+            }
+        )

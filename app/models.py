@@ -91,7 +91,38 @@ class Order(models.Model):
         verbose_name = "заказ"
         verbose_name_plural = "заказы"
 
+
+class Review(models.Model):
+    RATING_CHOICES = [
+        (1, 'Плохо'),
+        (2, 'Удовлетворительно'),
+        (3, 'Нормально'),
+        (4, 'Хорошо'),
+        (5, 'Отлично'),
+    ]
+
+    service = models.ForeignKey(Service, null=True, blank=True, on_delete = models.SET_NULL, verbose_name = "Услуга")
+    author = models.ForeignKey(User, null=True, blank=True, on_delete = models.SET_NULL, verbose_name = "Автор")
+    rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES, default=3, verbose_name = "Оценка")
+    comment = models.TextField(blank=True, null=True, verbose_name = "Комментарий")
+    created = models.DateTimeField(default=datetime.now(), db_index=True, verbose_name="Создан")
+    updated = models.DateTimeField(default=datetime.now(), db_index=True, verbose_name="Изменён")
+
+    def __str__(self):
+        return f'Отзыв от {self.author.username} на {self.service.title}'
+
+    def get_absolute_url(self):
+        return reverse("reviewpost", args=[str(self.id)])
+
+    class Meta:
+        db_table = "Reviews" # имя таблицы для модели
+        ordering = ["-id"] # порядок сортировки данных в модели ("-" означает по убыванию)
+        verbose_name = "отзыв"
+        verbose_name_plural = "отзывы"
+
+
 admin.site.register(Blog)
 admin.site.register(Comment)
 admin.site.register(Service)
 admin.site.register(Order)
+admin.site.register(Review)

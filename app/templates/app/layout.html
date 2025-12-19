@@ -32,7 +32,7 @@
                     <li><a href="{% url 'catalog' %}">Каталог услуг</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'basket' %}">Мои заказы</a></li>
-                    <li><a href="{% url 'pool' %}">Отзыв</a></li>
+                    <li><a href="{% url 'review' %}">Отзывы</a></li>
                     {% endif %}
                     <li><a href="{% url 'blog' %}">Новости</a></li>
                     {% if user.is_superuser %}
