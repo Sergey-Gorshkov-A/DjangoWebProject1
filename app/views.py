@@ -395,9 +395,43 @@ def completedorder(request, parametr):
         )
 
 
-def postedit():
-    return False
+def postedit(request, parametr):
+    post_1 = Blog.objects.get(id=parametr)
+
+    if request.method == "POST":
+        form = BlogForm(request.POST, instance=post_1)
+        if form.is_valid():
+            form.save()
+            return redirect('blog')
+    else:
+        form = BlogForm(instance=post_1)
+    return render (
+        request,
+        'app/postedit.html',
+        {
+            'post_1':post_1,
+            'form': form,
+            'year':datetime.now().year,
+            }
+        )
 
 
-def editservice():
-    return False
+def editservice(request, parametr):
+    service_1 = Service.objects.get(id=parametr)
+
+    if request.method == "POST":
+        form = ServiceForm(request.POST, instance=service_1)
+        if form.is_valid():
+            form.save()
+            return redirect('catalog')
+    else:
+        form = ServiceForm(instance=service_1)
+    return render (
+        request,
+        'app/editservice.html',
+        {
+            'service_1':service_1,
+            'form': form,
+            'year':datetime.now().year,
+            }
+        )

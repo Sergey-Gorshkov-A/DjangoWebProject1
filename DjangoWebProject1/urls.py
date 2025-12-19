@@ -47,6 +47,8 @@ urlpatterns = [
     path('order/', views.order, name='order'),
     path('editorder/<str:parametr>/', views.editorder, name='editorder'),
     path('completedorder/<str:parametr>/', views.completedorder, name='completedorder'),
+    path('postedit/<int:parametr>/', views.postedit, name='postedit'),
+    path('editservice/<int:parametr>/', views.editservice, name='editservice'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
