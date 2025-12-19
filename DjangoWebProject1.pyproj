@@ -79,6 +79,7 @@
     <Content Include="app\templates\app\newpost.html" />
     <Content Include="app\templates\app\newservice.html" />
     <Content Include="app\templates\app\review.html" />
+    <Content Include="app\templates\app\reviewpost.html" />
     <Content Include="app\templates\app\servicepost.html" />
     <Content Include="app\templates\app\videopost.html" />
     <Content Include="app\templates\app\service.html" />

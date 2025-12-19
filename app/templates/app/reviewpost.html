@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h2>{{ title }}</h2>
+<h2>Выберите услугу, на которую вы хотите оставить отзыв</h2>
 <br />
 
 {% for service in services %}
@@ -10,22 +10,20 @@
 <hr />
 
 <div class="">
+    <h2> Категория: {{service.category}} </h2>
 
-    <h2> {{service.title}} </h2>
+    <h2> Услуга: {{service.title}} </h2>
 
     <h4> {{service.description}} </h4>
 
     <p> Цена: {{service.price}} рублей</p>
 
-    <p><a href="{% url 'servicepost' parametr=service.id %}"> Купить </a> </p>
-
+    <p><a href="{% url 'addreview' parametr=service.id %}"> Оставить/изменить отзыв </a> </p>
     {% if user.is_superuser %}
     <p><a href="{% url 'editservice' parametr=service.id %}"> Редактировать услугу</a> </p>
     {% endif %}
 </div>
 
 {% endfor %}
-
-<p><a href="{% url 'catalog' %}"> Назад </a> </p>
 
 {% endblock %}

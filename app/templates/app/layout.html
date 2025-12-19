@@ -33,6 +33,7 @@
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'basket' %}">Мои заказы</a></li>
                     <li><a href="{% url 'review' %}">Отзывы</a></li>
+                    <li><a href="{% url 'reviewpost' %}">Оставить отзыв</a></li>
                     {% endif %}
                     <li><a href="{% url 'blog' %}">Новости</a></li>
                     {% if user.is_superuser %}

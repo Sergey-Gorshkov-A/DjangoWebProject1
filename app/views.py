@@ -4,6 +4,7 @@ Definition of views.
 
 from datetime import datetime
 from pickle import TRUE
+import re
 from unicodedata import category
 import weakref
 from django.shortcuts import render, redirect, get_object_or_404
@@ -235,6 +236,7 @@ def catalog(request):
 def service(request, parametr):
     
     services = Service.objects.filter(category=parametr)
+
     assert isinstance(request, HttpRequest)
     
     return render(
@@ -251,6 +253,18 @@ def service(request, parametr):
 def servicepost(request, parametr):
     
     service_1 = Service.objects.get(id=parametr)
+    reviews = Review.objects.filter(service=service_1)
+    rating_n = 0
+    n = 0
+
+    for review in reviews:
+        n += 1
+        rating_n += review.rating
+    
+    if n > 0:
+        rating_s = round(rating_n / n, 1)
+    else:
+        rating_s = round(rating_n, 1)
     
     if request.method == "POST":
         order_1 = Order()
@@ -267,6 +281,7 @@ def servicepost(request, parametr):
         {
             'title':"Страница услуги",
             'service_1':service_1,
+            'rating_s':rating_s,
             'year':datetime.now().year,
             }
         )
@@ -455,6 +470,13 @@ def deletereview(request, parametr):
     return redirect('review')
 
 
+def deletecomment(request, parametr):
+    comment_1 = get_object_or_404(Comment, id=parametr)
+    post = comment_1.post
+    comment_1.delete()
+    return redirect('blogpost', parametr=post.id)
+
+
 def review(request):
     
     assert isinstance(request, HttpRequest)
@@ -487,7 +509,7 @@ def addreview(request, parametr):
             review.service = service_1
             review.author = request.user
             review.save()
-            return redirect('service', parametr=service_1.category)
+            return redirect('reviewpost')
     else:
         form = ReviewForm()
     return render(
@@ -508,8 +530,10 @@ def editreview(request, parametr):
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
-            form.save()
-            return redirect('service', parametr=review.service.category)
+            review_f = form.save(commit=False)
+            review_f.updated = datetime.now()
+            review_f.save()
+            return redirect('reviewpost')
     else:
         form = ReviewForm(instance=review)
 
@@ -520,6 +544,20 @@ def editreview(request, parametr):
             'title':'Изменить отзыв',
             'form': form,
             'service_1': review.service,
+            'year':datetime.now().year,
+            }
+        )
+
+
+def reviewpost(request):
+    assert isinstance(request, HttpRequest)
+    services = Service.objects.all()
+    return render(
+        request,
+        'app/reviewpost.html',
+        {
+            'title':'Оставить отзыв на услуги',
+            'services': services,
             'year':datetime.now().year,
             }
         )

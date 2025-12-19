@@ -37,16 +37,20 @@
 {% endif %}
 
 {% for comment in comments %}
-<div class="comment">
-    <hr/>
+    <div class="comment">
+        <hr />
 
-    <h7> {{comment.date}} </h7>
+        <h7> {{comment.date}} </h7>
 
-    <h5> {{comment.author}} </h5>
+        <h5> {{comment.author}} </h5>
 
-    <p> {{comment.text|linebreaksbr}} </p>
+        <p> {{comment.text|linebreaksbr}} </p>
 
-</div>
+        {% if user.is_superuser %}
+        <p><a href="{% url 'deletecomment' parametr=comment.id %}"> Удалить комментарий</a> </p>
+        {% endif %}
+
+    </div>
 {% endfor %}
 
 
