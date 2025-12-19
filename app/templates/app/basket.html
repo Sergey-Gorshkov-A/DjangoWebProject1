@@ -17,7 +17,7 @@
 
     <p> {{order.price}} рублей</p>
 
-    <p><a href="{% url 'orderpost' parametr=order.ordered %}"> Подробнее </a> </p>
+    <p><a href="{% url 'orderpost' parametr=order.id %}"> Подробнее </a> </p>
 </div>
 
 {% endfor %}

@@ -21,8 +21,8 @@
 
     <p> {{order.service.description}} </p>
 
-    <p><a href="{% url 'editorder' parametr=order.ordered %}"> Подтвердить заказ </a> </p>
-    <p><a href="{% url 'completedorder' parametr=order.ordered %}"> Завершить заказ </a> </p>
+    <p><a href="{% url 'editorder' parametr=order.id %}"> Подтвердить заказ </a> </p>
+    <p><a href="{% url 'completedorder' parametr=order.id %}"> Завершить заказ </a> </p>
 </div>
 
 {% endfor %}

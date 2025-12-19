@@ -316,10 +316,10 @@ def basket(request):
 
 def orderpost(request, parametr):
     
-    order_1 = Order.objects.get(ordered=parametr)
+    order_1 = Order.objects.get(id=parametr)
     
     if request.method == "POST":
-        Order.objects.filter(ordered=order_1.ordered).delete()
+        order_1.delete()
         return redirect('basket')
 
     assert isinstance(request, HttpRequest)
@@ -352,7 +352,7 @@ def order(request):
 
 def editorder(request, parametr):
     
-    order_1 = Order.objects.get(ordered=parametr)
+    order_1 = Order.objects.get(id=parametr)
     
     if request.method == "POST":
         if not order_1.confrim:
@@ -376,7 +376,7 @@ def editorder(request, parametr):
 
 def completedorder(request, parametr):
     
-    order_1 = Order.objects.get(ordered=parametr)
+    order_1 = Order.objects.get(id=parametr)
     
     if request.method == "POST":
         order_1.completed = True
