@@ -37,7 +37,7 @@
                     {% endif %}
                     <li><a href="{% url 'blog' %}">Новости</a></li>
                     {% if user.is_superuser %}
-                    <li><a href="{% url 'newpost' %}">Добавить статью</a></li>
+                    <li><a href="{% url 'newpost' %}">Добавить новость</a></li>
                     <li><a href="{% url 'newservice' %}">Добавить услугу</a></li>
                     {% endif %}
                     {% if user.is_staff %}

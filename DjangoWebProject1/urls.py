@@ -57,6 +57,7 @@ urlpatterns = [
     path('deletereview/<int:parametr>/', views.deletereview, name='deletereview'),
     path('deletecomment/<int:parametr>/', views.deletecomment, name='deletecomment'),
     path('reviewpost/', views.reviewpost, name='reviewpost'),
+    path('deleteorder/<int:parametr>/', views.deleteorder, name='deleteorder'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

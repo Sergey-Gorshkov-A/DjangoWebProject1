@@ -23,6 +23,7 @@
 
     <p><a href="{% url 'editorder' parametr=order.id %}"> Подтвердить заказ </a> </p>
     <p><a href="{% url 'completedorder' parametr=order.id %}"> Завершить заказ </a> </p>
+    <p><a href="{% url 'deleteorder' parametr=order.id %}"> Удалить заказ </a> </p>
 </div>
 
 {% endfor %}

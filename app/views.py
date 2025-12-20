@@ -255,14 +255,14 @@ def servicepost(request, parametr):
     service_1 = Service.objects.get(id=parametr)
     reviews = Review.objects.filter(service=service_1)
     rating_n = 0
-    n = 0
+    count = 0
 
     for review in reviews:
-        n += 1
+        count += 1
         rating_n += review.rating
     
-    if n > 0:
-        rating_s = round(rating_n / n, 1)
+    if count > 0:
+        rating_s = round(rating_n / count, 1)
     else:
         rating_s = round(rating_n, 1)
     
@@ -282,6 +282,7 @@ def servicepost(request, parametr):
             'title':"Страница услуги",
             'service_1':service_1,
             'rating_s':rating_s,
+            'count':count,
             'year':datetime.now().year,
             }
         )
@@ -468,6 +469,12 @@ def deletereview(request, parametr):
     review_1 = get_object_or_404(Review, id=parametr)
     review_1.delete()
     return redirect('review')
+
+
+def deleteorder(request, parametr):
+    order_1 = get_object_or_404(Order, id=parametr)
+    order_1.delete()
+    return redirect('order')
 
 
 def deletecomment(request, parametr):

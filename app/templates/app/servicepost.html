@@ -12,9 +12,9 @@
 
 <p> {{service_1.content|linebreaksbr}} </p>      {# вывод текста по абзацам#}
 
-<h3> Цена: {{service_1.price}} </h3>
+<h3> Цена: {{service_1.price}} рублей </h3>
 
-<h3> Рейтинг: {{rating_s}}</h3>
+<h3> Рейтинг: {{rating_s}} (отзывов: {{count}})</h3>
 
 {% if user.is_authenticated %}
 
@@ -36,6 +36,8 @@
 <h3> Для добавления услуги в карзину, пожалуйста, авторизуйтесь </h3>
 
 {% endif %}
+
+<hr />
 
 <p><a href="{% url 'service' parametr=service_1.category %}"> НАЗАД </a> </p>
 
